@@ -49,3 +49,43 @@ function KhaNgich(number1, number2) {
     }
     return Y;
 }
+
+function EndCode() {
+    var txtEndcodeValue = document.getElementById("txt_endcode").value;
+    var khoaAValue = document.getElementById("KhoaA").value;
+    var khoaBValue = document.getElementById("KhoaB").value;
+    var zEndCodeValue = document.getElementById("ZEndCode").value;
+    var row1 = document.getElementById("Chu");
+    var row2 = document.getElementById("So");
+    var tinhmod = document.getElementById("pheptinhmod")
+    var chuoiDauTien = chuyenChuoiThanhObject(txtEndcodeValue.toUpperCase());
+    tinhmod.innerHTML = `Công thức: e<sub>K</sub>(x) =  ${khoaAValue}x + ${khoaBValue} mod ${zEndCodeValue}`;
+    var chuoiEndcode = "";
+    for (var i = 0; i < chuoiDauTien.length; i++) {
+        var item = chuoiDauTien[i];
+        console.log();
+        tinhmod.innerHTML += `<br> e<sub>K</sub>(${item.so}) =  ${khoaAValue}x${item.so} + ${khoaBValue} mod ${zEndCodeValue} = ${mod((parseInt(khoaAValue) * item.so + parseInt(khoaBValue)),zEndCodeValue)}`
+        chuoiEndcode += String.fromCharCode(mod((parseInt(khoaAValue) * item.so + parseInt(khoaBValue)), zEndCodeValue) + 65)
+        row1.innerHTML += "<td>" + item.ma + "</td>";
+        row2.innerHTML += "<td>" + item.so + "</td>"
+    }
+    document.getElementById("outputEndcode").value = chuoiEndcode;
+}
+
+function chuyenChuoiThanhObject(chuoi) {
+    var ketQua = [];
+
+    for (var i = 0; i < chuoi.length; i++) {
+        var kyTu = chuoi[i];
+        var maASCII = chuoi.charCodeAt(i);
+
+        var kyTuObject = {
+            ma: kyTu,
+            so: (parseInt(maASCII) - 65)
+        };
+
+        ketQua.push(kyTuObject);
+    }
+
+    return ketQua;
+}
