@@ -25,6 +25,9 @@ function TinhKhaNgich() {
 }
 
 function KhaNgich(number1, number2) {
+    if (!isCoprime(number1, number2)) {
+        return "Không có số khả nghịch";
+    }
     var M = parseInt(number2)
     var a = parseInt(number1)
     var Y0 = 0;
@@ -48,6 +51,17 @@ function KhaNgich(number1, number2) {
         Y = mod(Y, parseInt(number2))
     }
     return Y;
+}
+
+function isCoprime(a, b) {
+    function gcd(x, y) {
+        if (y === 0) {
+            return x;
+        } else {
+            return gcd(y, x % y);
+        }
+    }
+    return gcd(a, b) === 1;
 }
 
 function EndCode() {
