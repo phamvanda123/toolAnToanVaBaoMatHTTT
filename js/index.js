@@ -41,6 +41,7 @@ function calculate() {
 }
 
 function mod(number1, number2) {
+    if (number1 == 0) return 0
     if (number1 > 0) return number1 % number2;
     else {
         if (Math.abs(number1) < number2) {
