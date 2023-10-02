@@ -26,7 +26,7 @@ function load() {
 
 
 }
-load()
+// load()
 
 function active() {
     const overlay = document.querySelector('.active');
