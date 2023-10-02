@@ -1,6 +1,6 @@
 function load() {
     Swal.fire({
-        title: 'Trang web do Phạm Văn Dã Phát triển hãy nhập vandadeptrai để tiếp tục',
+        title: 'Trang web do Phạm Văn Dã Phát triển hãy nhập mật khẩu để tiếp tục',
         input: 'text',
         inputPlaceholder: 'Nhập thông tin ở đây...',
         showCancelButton: true,
@@ -26,6 +26,7 @@ function load() {
 
 
 }
+load()
 
 function active() {
     const overlay = document.querySelector('.active');
