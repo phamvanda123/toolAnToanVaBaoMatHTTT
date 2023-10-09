@@ -64,7 +64,7 @@
           indexMangMod--;
           if (index === mangKq.length - 1) {
             result.innerHTML += `
-          ${CoSo}<sup>${mangKq[index]}</sup> mod ${SoMod} = ${mangMod[indexMangMod]} <br>
+          ${CoSo}<sup>${mangKq[index]}</sup> mod ${SoMod} = ${mangMod[indexMangMod]}  <br>
           `;
           } else {
             result.innerHTML += `
@@ -72,7 +72,7 @@
               mangKq[index + 1]
             }</sup> mod ${SoMod})<sup>2</sup> ${
               mangKq[index] % 2 !== 0 ? "*" + CoSo : ""
-            }]= ${mangMod[indexMangMod]}<br>
+            }] mod ${SoMod}= ${mangMod[indexMangMod]}<br>
           `;
           }
         }
