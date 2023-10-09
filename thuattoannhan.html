@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chia Đôi và Làm Tròn Số Lẻ Đến 2</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <h1>Chia Đôi và Làm Tròn Số Lẻ Đến 2</h1>
+      <div class="form-group">
+        <label for="soNhap">Số mũ:</label>
+        <input type="number" class="form-control" id="soNhap" />
+      </div>
+      <button class="btn btn-primary" onclick="chiaVaLamTron()">
+        Chia và Làm Tròn
+      </button>
+      <div class="form-group mt-3">
+        <label for="ketQua">Cơ số</label>
+        <input type="text" id="CoSo" class="form-control" />
+      </div>
+      <div class="form-group mt-3">
+        <label for="ketQua">Số mod:</label>
+        <input type="text" id="soMod" class="form-control" />
+      </div>
+      <p id="ketQua"></p>
+    </div>
+
+    <script>
+      function chiaVaLamTron() {
+        var mangKq = [];
+        var mangMod = [];
+        const SoMu = parseFloat(document.getElementById("soNhap").value);
+        const CoSo = parseFloat(document.getElementById("CoSo").value);
+        const SoMod = parseFloat(document.getElementById("soMod").value);
+        const result = document.getElementById("ketQua");
+        let ketQua = SoMu;
+        mangKq.push(ketQua);
+        while (ketQua !== 2) {
+          ketQua /= 2;
+          ketQua = parseInt(ketQua);
+          mangKq.push(ketQua);
+        }
+        var indexMangMod = 0;
+        for (let index = mangKq.length - 1; index > -1; index--) {
+          if (index === mangKq.length - 1) {
+            mangMod.push(mod(Math.pow(CoSo, mangKq[index]), SoMod));
+          } else {
+            let socanmod = Math.pow(mangMod[indexMangMod], 2);
+            if (mangKq[index] % 2 !== 0) {
+              socanmod = Math.pow(mangMod[indexMangMod], 2) * CoSo;
+            }
+            mangMod.push(mod(socanmod, SoMod));
+            indexMangMod++;
+          }
+        }
+        indexMangMod = mangMod.length;
+        for (let index = 0; index < mangKq.length; index++) {
+          indexMangMod--;
+          if (index === mangKq.length - 1) {
+            result.innerHTML += `
+          ${CoSo}<sup>${mangKq[index]}</sup> mod ${SoMod} = ${mangMod[indexMangMod]} <br>
+          `;
+          } else {
+            result.innerHTML += `
+          ${CoSo}<sup>${mangKq[index]}</sup> mod ${SoMod} = [(${CoSo}<sup>${
+              mangKq[index + 1]
+            }</sup> mod ${SoMod})<sup>2</sup> ${
+              mangKq[index] % 2 !== 0 ? "*" + CoSo : ""
+            }]= ${mangMod[indexMangMod]}<br>
+          `;
+          }
+        }
+
+        console.log(mangKq);
+        console.log(mangMod);
+      }
+
+      function mod(number1, number2) {
+        if (number1 == 0) return 0;
+        if (number1 > 0) return number1 % number2;
+        else {
+          if (Math.abs(number1) < number2) {
+            return number2 + number1;
+          } else {
+            let tempnumber = Math.abs(number1);
+            return (
+              number2 - (tempnumber - number2 * parseInt(tempnumber / number2))
+            );
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
